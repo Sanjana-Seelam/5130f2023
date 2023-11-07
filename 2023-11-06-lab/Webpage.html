@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <script>
+    function validateForm() {
+      const url = document.getElementById('url').value;
+      const email = document.getElementById('email').value;
+      const phoneNumber = document.getElementById('phone').value;
+
+      const urlRegex = /^(https?):\/\/([A-Za-z0-9\-_]+(?:\.[A-Za-z0-9\-_]+)*(?:\.[A-Za-z]{2,})+)(\/[^?#]*)?(?:\?([^#]*))?(?:#(.*))?$/;
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}(\.[A-Z|a-z]{2,})?$/;
+      const phoneRegex = /^(\+\d{1,2}\s?)?(\()?\d{3}(\))?[-.\s]?\d{3}[-.\s]?\d{4}$/;
+
+      const isValidURL = urlRegex.test(url);
+      const isValidEmail = emailRegex.test(email);
+      const isValidPhone = phoneRegex.test(phoneNumber);
+
+      const urlValidation = document.getElementById('url-validation');
+      const emailValidation = document.getElementById('email-validation');
+      const phoneValidation = document.getElementById('phone-validation');
+
+      urlValidation.innerText = isValidURL ? 'Valid' : 'Invalid';
+      emailValidation.innerText = isValidEmail ? 'Valid' : 'Invalid';
+      phoneValidation.innerText = isValidPhone ? 'Valid' : 'Invalid';
+
+      if (isValidURL && isValidEmail && isValidPhone) {
+        alert('Submitted successfully!');
+        return true;
+      } else {
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Webpage for input Validation</h1>
+  <form onsubmit="return validateForm()">
+    <label for="url">1. URL:</label>
+    <input type="text" id="url" name="url" required>
+    <span id="url-validation"></span><br><br>
+
+    <label for="email">2. Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span id="email-validation"></span><br><br>
+
+    <label for="phone">3. Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
+    <small>Format: +1 (555) 123-4567 or 555-123-4567</small>
+    <span id="phone-validation"></span><br><br>
+
+    <button type="submit">Submit</button>
+    <button type="button" onclick="clearForm()">Cancel</button>
+  </form>
+
+  <script>
+    function clearForm() {
+      document.getElementById('url').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('url-validation').innerText = '';
+      document.getElementById('email-validation').innerText = '';
+      document.getElementById('phone-validation').innerText = '';
+    }
+  </script>
+</body>
+</html>
+
+
+
+
